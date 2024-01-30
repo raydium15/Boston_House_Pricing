@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-ml-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-ml-app
+  template:
+    metadata:
+      labels:
+        app: my-ml-app
+    spec:
+     containers:
+      - name: my-ml-app
+        image: raydium/boston_housing:latest
+        ports:
+         - containerPort: 80
