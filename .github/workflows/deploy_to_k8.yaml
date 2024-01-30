@@ -33,5 +33,6 @@ jobs:
 
     - name: Deploy to Kubernetes
       run: |
+        kubectl config current-context
         kubectl apply -f kubernetes/deployment.yaml --validate=false
         kubectl apply -f kubernetes/service.yaml
