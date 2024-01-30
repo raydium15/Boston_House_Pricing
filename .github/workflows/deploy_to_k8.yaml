@@ -28,7 +28,7 @@ jobs:
         cp kubernetes/kubeconfig.yaml ${HOME}/.kube/config
         cat ${HOME}/.kube/config
     - name: Use context
-      run : kubectul config use-context docker-desktop
+      run : kubectl config use-context docker-desktop
           
         
 
