@@ -16,7 +16,7 @@ spec:
       - name: my-ml-app
         image: raydium/boston_housing:latest
         ports:
-        - containerPort: 6443
+        - containerPort: 80
         resources:
           limits:
             cpu: "0.5"  # Adjust as needed
