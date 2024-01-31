@@ -26,7 +26,7 @@ jobs:
       run: |
           echo "${{ secrets.KUBE_CONFIG_BASE64 }}" | base64 --decode > kubeconfig.yaml
           kubectl config view --flatten > merged-kubeconfig.yaml
-          kubectl config use-context docker-desktop
+          kubectl config current-context
       env:
           KUBE_CONFIG_BASE64: ${{ secrets.KUBE_CONFIG_BASE64 }}
 
