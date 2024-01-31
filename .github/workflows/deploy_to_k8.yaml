@@ -25,6 +25,7 @@ jobs:
     - name: Set up kubectl
       run: |
           echo "${{ secrets.KUBE_CONFIG_BASE64 }}" | base64 --decode > kubeconfig.yaml
+          cat kubeconfig.yaml
           kubectl config view --flatten > merged-kubeconfig.yaml
           kubectl config current-context
       env:
