@@ -30,12 +30,11 @@ jobs:
           
           
       env:
-          KUBECONFIG: ${{ secrets.KUBE_CONFIG_BASE64 }}
+          KUBECONFIG: $PWD/kubeconfig2.yaml
 
     - name: Deploy to Kubernetes
       run: |
-        kubectl config current-context
+        kubectl config current-context --kubeconfig=kubeconfig2.yaml
         kubectl apply -f kubernetes/deployment.yaml
         kubectl apply -f kubernetes/service.yaml
-      env:
-        KUBECONFIG: ${{ secrets.KUBE_CONFIG_BASE64 }}
+
