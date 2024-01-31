@@ -27,7 +27,7 @@ jobs:
           echo "${{ secrets.KUBE_CONFIG_BASE64 }}" | base64 --decode > kubeconfig2.yaml
           kubectl config get-contexts --kubeconfig=kubeconfig2.yaml
           cat kubeconfig2.yaml
-          export KUBECONFIG=$PWD/kubeconfig2.yaml
+          
           
       env:
           KUBECONFIG: ${{ secrets.KUBE_CONFIG_BASE64 }}
