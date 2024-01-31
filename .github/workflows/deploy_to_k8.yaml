@@ -30,7 +30,7 @@ jobs:
 
     - name: Set KUBECONFIG environment variable
       run: |
-        echo "KUBECONFIG=${HOME}/.kube/config" >> $GITHUB_ENV
+        export KUBECONFIG=${HOME}/.kube/config
 
     - name: Deploy to Kubernetes
       run: |
