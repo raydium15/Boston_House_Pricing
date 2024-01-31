@@ -22,15 +22,13 @@ jobs:
         docker buildx create --use
         docker buildx build --platform linux/amd64,linux/arm64 -t raydium/boston_housing:latest --push .
         
-    - name: Create kubeconfig
+    - name: Set up kubectl
       run: |
-        mkdir ${HOME}/.kube
-        cp kubernetes/kubeconfig.yaml ${HOME}/.kube/config
-        cat ${HOME}/.kube/config
-
-    - name: Set KUBECONFIG environment variable
-      run: |
-        export KUBECONFIG=${HOME}/.kube/config
+          echo "${{ secrets.KUBE_CONFIG_BASE64 }}" | base64 --decode > kubeconfig.yaml
+          kubectl config view --flatten > merged-kubeconfig.yaml
+          kubectl config use-context your-context-name
+      env:
+          KUBE_CONFIG_BASE64: ${{ secrets.KUBE_CONFIG_BASE64 }}
 
     - name: Deploy to Kubernetes
       run: |
