@@ -25,15 +25,17 @@ jobs:
     - name: Set up kubectl
       run: |
           echo "${{ secrets.KUBE_CONFIG_BASE64 }}" | base64 --decode > kubeconfig2.yaml
-          kubectl config get-contexts
+          kubectl config get-contexts --kubeconfig=kubeconfig2.yaml
           cat kubeconfig2.yaml
           export KUBECONFIG=$PWD/kubeconfig2.yaml
           
       env:
-          KUBE_CONFIG_BASE64: ${{ secrets.KUBE_CONFIG_BASE64 }}
+          KUBECONFIG: ${{ secrets.KUBE_CONFIG_BASE64 }}
 
     - name: Deploy to Kubernetes
       run: |
         kubectl config current-context
         kubectl apply -f kubernetes/deployment.yaml
         kubectl apply -f kubernetes/service.yaml
+      env:
+        KUBECONFIG: ${{ secrets.KUBE_CONFIG_BASE64 }}
