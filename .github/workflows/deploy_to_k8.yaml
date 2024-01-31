@@ -23,13 +23,14 @@ jobs:
         docker buildx build --platform linux/amd64,linux/arm64 -t raydium/boston_housing:latest --push .
         
     - name: Create kubeconfig
-      run : |
+      run: |
         mkdir ${HOME}/.kube
         cp kubernetes/kubeconfig.yaml ${HOME}/.kube/config
         cat ${HOME}/.kube/config
 
-          
-        
+    - name: Set KUBECONFIG environment variable
+      run: |
+        echo "KUBECONFIG=${HOME}/.kube/config" >> $GITHUB_ENV
 
     - name: Deploy to Kubernetes
       run: |
